@@ -10,7 +10,7 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/build/${fileBasenameNoExtension}",
+                "${fileDirname}/bin/${fileBasenameNoExtension}",
                 "-lstdc++",
             ],
             "options": {
