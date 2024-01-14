@@ -17,7 +17,6 @@ const std::string red("\033[0;31m");
 // ANSI escape code to reset text color back to normal
 const std::string reset("\033[0m");
 
-
 bool isInteger(const std::string &str)
 {
     for (char ch : str)
