@@ -4,48 +4,10 @@
 #include <fstream>
 #include <string>
 #include <filesystem>
-#include "utils/utils.cpp"
-
+#include "../include/utils/utils.h"
+#include "../include/utils/caesar.h"
 
 namespace fs = std::filesystem;
-
-// ====================== //
-// ====== FUNCTIONS ===== //
-// ====================== //
-
-void encryptFile(const fs::path &inputFilePath, const fs::path &outputFilePath, int key)
-{
-    std::ifstream inputFile(inputFilePath, std::ios::binary);
-    std::ofstream outputFile(outputFilePath, std::ios::binary);
-
-    char ch;
-    while (inputFile.get(ch))
-    {
-        outputFile.put(ch + key);
-    }
-
-    inputFile.close();
-    outputFile.close();
-}
-
-void decryptFile(const fs::path &inputFilePath, const fs::path &outputFilePath, int key)
-{
-    std::ifstream inputFile(inputFilePath, std::ios::binary);
-    std::ofstream outputFile(outputFilePath, std::ios::binary);
-
-    char ch;
-    while (inputFile.get(ch))
-    {
-        outputFile.put(ch - key);
-    }
-
-    inputFile.close();
-    outputFile.close();
-}
-
-// ====================== //
-// ====== MAIN CODE ===== //
-// ====================== //
 
 int main()
 {
@@ -66,11 +28,11 @@ int main()
 
     if (choice == 1)
     {
-        encryptFile(inputFilePath, outputFilePath, key);
+        caesar::encryptFile(inputFilePath, outputFilePath, key);
     }
     else if (choice == 2)
     {
-        decryptFile(inputFilePath, outputFilePath, key);
+        caesar::decryptFile(inputFilePath, outputFilePath, key);
     }
 
     return 0;

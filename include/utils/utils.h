@@ -1,11 +1,9 @@
-#ifndef UTILS_H
-#define UTILS_H
+#pragma once
 
 #include <string>
 
-// Function declarations go here
-bool isInteger(const std::string& s);
-int getValidChoice();
-int getValidKey();
-
-#endif // UTILS_H
+namespace utils {
+    extern bool isInteger(const std::string& s);
+    extern int getValidChoice();
+    extern int getValidKey();
+}

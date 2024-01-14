@@ -9,8 +9,9 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
+                "utils/*.cpp", // Adds utils folder to compile
                 "-o",
-                "${fileDirname}/bin/${fileBasenameNoExtension}",
+                "${workspaceFolder}/bin/${fileBasenameNoExtension}",
                 "-lstdc++",
             ],
             "options": {

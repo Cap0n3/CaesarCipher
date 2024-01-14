@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "include/utils/utils.h"
+#include "../../include/utils/utils.h"
 
 // ANSI escape code for red text
 const std::string red("\033[0;31m");
@@ -13,71 +13,70 @@ const std::string reset("\033[0m");
 // ====== UTILITIES ===== //
 // ====================== //
 
-namespace utils {
-    bool isInteger(const std::string &str)
+
+bool utils::isInteger(const std::string &str)
+{
+    for (char ch : str)
     {
-        for (char ch : str)
+        if (!std::isdigit(ch))
         {
-            if (!std::isdigit(ch))
-            {
-                return false;
-            }
+            return false;
         }
-        return true;
     }
+    return true;
+}
 
-    int getValidKey()
+int utils::getValidKey()
+{
+    std::string keyStr;
+    int key;
+
+    do
     {
-        std::string keyStr;
-        int key;
+        std::cout << "Enter key (integer): ";
+        std::cin >> keyStr;
 
-        do
+        if (!utils::isInteger(keyStr))
         {
-            std::cout << "Enter key (integer): ";
-            std::cin >> keyStr;
+            std::cerr << red <<"Error: Invalid input. Please enter a valid integer key." << reset << std::endl;
+            continue;
+        }
 
-            if (!isInteger(keyStr))
-            {
-                std::cerr << red <<"Error: Invalid input. Please enter a valid integer key." << reset << std::endl;
-                continue;
-            }
+        key = std::stoi(keyStr);
 
-            key = std::stoi(keyStr);
-
-            if (key < 0 || key > 255)
-            {
-                std::cerr << red << "Error: Key must be between 0 and 255." << reset << std::endl;
-            }
-
-        } while (key < 0 || key > 255 || !isInteger(keyStr));
-
-        return key;
-    }
-
-    int getValidChoice() {
-        std::string choiceStr;
-        int choice;
-
-        do
+        if (key < 0 || key > 255)
         {
-            std::cout << "Enter your choice: ";
-            std::cin >> choiceStr;
+            std::cerr << red << "Error: Key must be between 0 and 255." << reset << std::endl;
+        }
 
-            if (!isInteger(choiceStr))
-            {
-                std::cerr << red << "Error: Invalid input. Please enter a valid integer choice." << reset << std::endl;
-                continue;
-            }
+    } while (key < 0 || key > 255 || !utils::isInteger(keyStr));
 
-            choice = std::stoi(choiceStr);
+    return key;
+}
 
-            if (choice != 1 && choice != 2)
-            {
-                std::cerr << red << "Error: Invalid input. Please enter 1 or 2." << reset << std::endl;
-            }
+int utils::getValidChoice() {
+    std::string choiceStr;
+    int choice;
 
-        } while (choice != 1 && choice != 2);
+    do
+    {
+        std::cout << "Enter your choice: ";
+        std::cin >> choiceStr;
 
-        return choice;
-    }
+        if (!utils::isInteger(choiceStr))
+        {
+            std::cerr << red << "Error: Invalid input. Please enter a valid integer choice." << reset << std::endl;
+            continue;
+        }
+
+        choice = std::stoi(choiceStr);
+
+        if (choice != 1 && choice != 2)
+        {
+            std::cerr << red << "Error: Invalid input. Please enter 1 or 2." << reset << std::endl;
+        }
+
+    } while (choice != 1 && choice != 2);
+
+    return choice;
 }
