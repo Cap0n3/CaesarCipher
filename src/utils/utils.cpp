@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "include/utils/utils.h"
 
 // ANSI escape code for red text
 const std::string red("\033[0;31m");
@@ -13,10 +14,6 @@ const std::string reset("\033[0m");
 // ====================== //
 
 namespace utils {
-    // ====================== //
-    // ====== UTILITIES ===== //
-    // ====================== //
-
     bool isInteger(const std::string &str)
     {
         for (char ch : str)
@@ -27,33 +24,6 @@ namespace utils {
             }
         }
         return true;
-    }
-
-    int getValidChoice() {
-        std::string choiceStr;
-        int choice;
-
-        do
-        {
-            std::cout << "Enter your choice: ";
-            std::cin >> choiceStr;
-
-            if (!isInteger(choiceStr))
-            {
-                std::cerr << red << "Error: Invalid input. Please enter a valid integer choice." << reset << std::endl;
-                continue;
-            }
-
-            choice = std::stoi(choiceStr);
-
-            if (choice != 1 && choice != 2)
-            {
-                std::cerr << red << "Error: Invalid input. Please enter 1 or 2." << reset << std::endl;
-            }
-
-        } while (choice != 1 && choice != 2);
-
-        return choice;
     }
 
     int getValidKey()
@@ -82,5 +52,32 @@ namespace utils {
         } while (key < 0 || key > 255 || !isInteger(keyStr));
 
         return key;
+    }
+
+    int getValidChoice() {
+        std::string choiceStr;
+        int choice;
+
+        do
+        {
+            std::cout << "Enter your choice: ";
+            std::cin >> choiceStr;
+
+            if (!isInteger(choiceStr))
+            {
+                std::cerr << red << "Error: Invalid input. Please enter a valid integer choice." << reset << std::endl;
+                continue;
+            }
+
+            choice = std::stoi(choiceStr);
+
+            if (choice != 1 && choice != 2)
+            {
+                std::cerr << red << "Error: Invalid input. Please enter 1 or 2." << reset << std::endl;
+            }
+
+        } while (choice != 1 && choice != 2);
+
+        return choice;
     }
 }
